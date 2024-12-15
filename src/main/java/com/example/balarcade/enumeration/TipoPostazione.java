@@ -5,10 +5,8 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum UserRole {
-
-    ADMIN,
-    USER
-
+public enum TipoPostazione {
+    PC,
+    CONSOLE,
+    SIMULATORE
 }
-
