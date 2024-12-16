@@ -1,8 +1,10 @@
 package com.example.balarcade.controller;
 
 import com.example.balarcade.dto.UtenteAuthDTO;
+import com.example.balarcade.exception.BalarcadeException;
 import com.example.balarcade.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -42,7 +44,7 @@ public class AuthController {
             return Collections.singletonMap("jwt-token", token);
         } catch (AuthenticationException authExc) {
             // Auhentication Failed
-            throw new RuntimeException("Invalid Login Credentials");
+            throw new BalarcadeException("Invalid Login Credentials", HttpStatus.UNAUTHORIZED);
         }
     }
 
