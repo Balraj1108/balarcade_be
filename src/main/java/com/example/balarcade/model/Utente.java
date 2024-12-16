@@ -23,9 +23,10 @@ public class Utente {
     private Long id;
     @Enumerated(value = EnumType.STRING)
     protected RuoloUtente ruolo;
+    protected String email;
+    protected String password;
     protected String nome;
     protected String cognome;
-    protected String email;
     protected String numero;
 
     @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
