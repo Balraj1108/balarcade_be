@@ -32,4 +32,11 @@ public class Utente {
     @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Prenotazione> prenotazioni = new HashSet<>();
 
+    public Utente(String nome, String cognome, String numero, String email, String password) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.numero = numero;
+        this.email = email;
+        this.password = password;
+    }
 }
