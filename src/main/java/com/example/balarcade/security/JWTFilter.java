@@ -31,22 +31,16 @@ public class JWTFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		// Extracting the "Authorization" header
 		String authHeader = request.getHeader("Authorization");
 
-		// Checking if the header contains a Bearer token
 		if (StringUtils.isNotBlank(authHeader) && authHeader.startsWith("Bearer ")) {
-			// Extract JWT
 			String jwt = authHeader.substring(7);
 			if (StringUtils.isBlank(jwt)) {
-				// Invalid JWT
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid JWT Token in Bearer Header");
 			} else {
 				try {
-					// Verify token and extract username
 					String username = jwtUtil.validateTokenAndRetrieveSubject(jwt);
 
-					// Fetch User Details
 					UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
 					UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
@@ -56,17 +50,14 @@ public class JWTFilter extends OncePerRequestFilter {
 					SecurityContextHolder.getContext().setAuthentication(authentication);
 
 				} catch (TokenExpiredException exc) {
-					// JWT expired
 					LOGGER.error("JWT token is expired: {}", exc.getMessage());
 					request.setAttribute("expired", exc.getMessage());
 				} catch (JWTVerificationException exc) {
-					// Failed to verify JWT
 					LOGGER.error("Cannot set user authentication: {}", exc);
 				}
 			}
 		}
 
-		// Continuing the execution of the filter chain
 		filterChain.doFilter(request, response);
 	}
 }

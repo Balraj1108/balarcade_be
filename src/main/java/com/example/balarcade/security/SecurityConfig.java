@@ -3,7 +3,6 @@ package com.example.balarcade.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -53,26 +52,13 @@ public class SecurityConfig {
 		return source;
 	}
 
-//	@Bean
-//	SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-//		return httpSecurity
-//				.authorizeHttpRequests(requests -> requests
-//						.requestMatchers("/api/auth/login").permitAll()
-//						.requestMatchers("/admin").hasRole("ADMIN")
-//						.requestMatchers("/error").permitAll()
-//						.anyRequest().authenticated()
-//				)
-//				.formLogin(Customizer.withDefaults())
-//				.build();
-//	}
-
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		return httpSecurity
 				.csrf(AbstractHttpConfigurer::disable) // Disabilita CSRF per le API stateless
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless
 				.authorizeHttpRequests(requests -> requests
-						.requestMatchers("/api/auth/login", "/api/utente/registrazione").permitAll() // Permetti l'accesso pubblico al login
+						.requestMatchers("/api/auth/login", "/api/utente/registrazione").permitAll() // Permetti l'accesso pubblico al login e registrazione
 						.requestMatchers("/admin").hasRole("ADMIN") // Accesso riservato agli amministratori
 						.anyRequest().authenticated() // Tutte le altre richieste richiedono autenticazione
 				)

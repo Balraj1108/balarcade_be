@@ -25,7 +25,7 @@ public class JWTAuthEntryPoint implements AuthenticationEntryPoint {
 
 		logger.error("Unauthorized error: {}", authException.getMessage());
 
-		// se il token risulta scaduto voglio notificarlo al chiamante
+		// token scaduto
 		final String expired = (String) request.getAttribute("expired");
 		if (expired != null) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, expired);
