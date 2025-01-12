@@ -19,7 +19,7 @@ public class UtenteController {
 
 
 
-    @PostMapping
+    @PostMapping("/registrazione")
     public UtenteDTO registrazioneUtente(@Valid @RequestBody UtenteDTO utenteDTO) {
 
         sp.utenteService.registrazioneUtente(utenteDTO.buildClienteModel());
