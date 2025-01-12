@@ -4,6 +4,8 @@ import com.example.balarcade.dto.UtenteDTO;
 import com.example.balarcade.service.ServiceProvider;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +22,10 @@ public class UtenteController {
 
 
     @PostMapping("/registrazione")
-    public UtenteDTO registrazioneUtente(@Valid @RequestBody UtenteDTO utenteDTO) {
+    public ResponseEntity<Void> registrazioneUtente(@Valid @RequestBody UtenteDTO utenteDTO) {
 
         sp.utenteService.registrazioneUtente(utenteDTO.buildClienteModel());
-        return utenteDTO;
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }
