@@ -1,13 +1,12 @@
-package com.example.balarcade.service.utente;
+package com.example.balarcade.service;
 
 import com.example.balarcade.enumeration.RuoloUtente;
 import com.example.balarcade.exception.BalarcadeException;
 import com.example.balarcade.model.Utente;
-import com.example.balarcade.repository.utente.UtenteRepository;
-import com.example.balarcade.service.ServiceProvider;
+import com.example.balarcade.repository.UtenteRepository;
+import com.example.balarcade.service.provider.ServiceProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,8 +19,7 @@ public class UtenteService {
 
     private ServiceProvider sp;
 
-    @Autowired
-    private UtenteRepository repository;
+    private final UtenteRepository repository;
 
     private final PasswordEncoder passwordEncoder;
 

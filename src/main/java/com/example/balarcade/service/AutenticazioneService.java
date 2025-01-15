@@ -1,6 +1,6 @@
-package com.example.balarcade.service.autenticazione;
+package com.example.balarcade.service;
 
-import com.example.balarcade.service.ServiceProvider;
+import com.example.balarcade.service.provider.ServiceProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;

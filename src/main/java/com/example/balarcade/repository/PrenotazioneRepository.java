@@ -1,4 +1,4 @@
-package com.example.balarcade.repository.prenotazione;
+package com.example.balarcade.repository;
 
 import com.example.balarcade.model.Prenotazione;
 import org.springframework.data.repository.CrudRepository;

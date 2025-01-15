@@ -1,7 +1,7 @@
 package com.example.balarcade.security;
 
 import com.example.balarcade.model.Utente;
-import com.example.balarcade.repository.utente.UtenteRepository;
+import com.example.balarcade.repository.UtenteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,4 +1,4 @@
-package com.example.balarcade.repository.postazione;
+package com.example.balarcade.repository;
 
 import com.example.balarcade.model.Postazione;
 import org.springframework.data.repository.CrudRepository;

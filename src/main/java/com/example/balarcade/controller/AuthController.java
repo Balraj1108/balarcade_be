@@ -3,7 +3,7 @@ package com.example.balarcade.controller;
 import com.example.balarcade.dto.UtenteAuthDTO;
 import com.example.balarcade.exception.BalarcadeException;
 import com.example.balarcade.security.JWTUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,13 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collections;
 import java.util.Map;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    @Autowired
     private JWTUtil jwtUtil;
-    @Autowired
     private AuthenticationManager authManager;
 
     @PostMapping("/login")

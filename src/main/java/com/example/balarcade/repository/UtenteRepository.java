@@ -1,4 +1,4 @@
-package com.example.balarcade.repository.utente;
+package com.example.balarcade.repository;
 
 import com.example.balarcade.model.Utente;
 import org.springframework.data.repository.CrudRepository;
