@@ -21,8 +21,8 @@ import java.util.Map;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private JWTUtil jwtUtil;
-    private AuthenticationManager authManager;
+    private final JWTUtil jwtUtil;
+    private final AuthenticationManager authManager;
 
     @PostMapping("/login")
     public Map<String, Object> loginHandler(@RequestBody UtenteAuthDTO body) {

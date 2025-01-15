@@ -1,11 +1,9 @@
 package com.example.balarcade.controller;
 
 import com.example.balarcade.dto.PostazioneDTO;
-import com.example.balarcade.dto.UtenteDTO;
+import com.example.balarcade.model.Postazione;
 import com.example.balarcade.service.provider.ServiceProvider;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +16,8 @@ public class PostazioneController {
     private final ServiceProvider sp;
 
     @GetMapping
-    public ResponseEntity<List<PostazioneDTO>> prendiPostazioni(@Valid @RequestBody UtenteDTO utenteDTO) {
-
-        sp.utenteService.registrazioneUtente(utenteDTO.buildClienteModel());
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<List<PostazioneDTO>> prendiPostazioni() {
+        List<Postazione> postazioni = sp.postazioneService.prendiPostazioni();
+        return ResponseEntity.ok(PostazioneDTO.fromEntity(postazioni));
     }
 }
