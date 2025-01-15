@@ -22,4 +22,8 @@ public class PostazioneService {
         return repository.findAll();
     }
 
+    public Postazione cercaPerId(Long id) {
+        return repository.findById(id).get();
+    }
+
 }

@@ -34,4 +34,8 @@ public class UtenteService {
         repository.save(utente);
     }
 
+    public Utente cercaPerId(Long id) {
+        return repository.findById(id).get();
+    }
+
 }

@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public enum StatoPrenotazione {
     CONFERMATA,
-    TERMINATA,
+    MODIFICATA,
     CANCELLATA
 
 }
