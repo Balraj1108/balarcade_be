@@ -37,7 +37,48 @@ public class PrenotazioneService {
     }
 
     @Transactional
+    public void modificaPrenotazione(PrenotazionePostDTO prenotazionePostDTO) {
+        if(prenotazionePostDTO.getPrenotazioneId() == null){
+            throw new BalarcadeException("prenotazioneId non puo essere null.", HttpStatus.BAD_REQUEST);
+        }
+        // Recupera la prenotazione esistente
+        Prenotazione prenotazioneEsistente = repository.findById(prenotazionePostDTO.getPrenotazioneId())
+                .orElseThrow(() -> new BalarcadeException("Prenotazione non trovata.", HttpStatus.NOT_FOUND));
+
+        // Valida i dati della prenotazione
+        validaPrenotazione(prenotazionePostDTO);
+
+        // Aggiorna i dati della prenotazione
+        prenotazioneEsistente.setDataInizio(prenotazionePostDTO.getDataInizio());
+        prenotazioneEsistente.setDataFine(prenotazionePostDTO.getDataFine());
+        prenotazioneEsistente.setCostoTotale(prenotazionePostDTO.getCostoTotale());
+        prenotazioneEsistente.setStato(StatoPrenotazione.MODIFICATA);
+        prenotazioneEsistente.setPostazione(sp.postazioneService.cercaPerId(prenotazionePostDTO.getPostazioneId()));
+
+        // Salva i cambiamenti
+        repository.save(prenotazioneEsistente);
+    }
+
+
+    @Transactional
     public void prenota(PrenotazionePostDTO prenotazionePostDTO) {
+        // Valida i dati della prenotazione
+        validaPrenotazione(prenotazionePostDTO);
+
+        // Salva la nuova prenotazione
+        repository.save(
+                Prenotazione.builder()
+                        .dataInizio(prenotazionePostDTO.getDataInizio())
+                        .dataFine(prenotazionePostDTO.getDataFine())
+                        .utente(sp.utenteService.cercaPerId(prenotazionePostDTO.getUtenteId()))
+                        .postazione(sp.postazioneService.cercaPerId(prenotazionePostDTO.getPostazioneId()))
+                        .costoTotale(prenotazionePostDTO.getCostoTotale())
+                        .stato(StatoPrenotazione.CONFERMATA)
+                        .build()
+        );
+    }
+
+    private void validaPrenotazione(PrenotazionePostDTO prenotazionePostDTO) {
         LocalDateTime oggi = LocalDateTime.now();
 
         // Controllo che la data di inizio non sia oggi o in una data passata
@@ -66,17 +107,5 @@ public class PrenotazioneService {
         if (esisteSovrapposizione) {
             throw new BalarcadeException("La postazione è già prenotata in questo intervallo di tempo.", HttpStatus.BAD_REQUEST);
         }
-
-        // Salva la nuova prenotazione
-        repository.save(
-                Prenotazione.builder()
-                        .dataInizio(prenotazionePostDTO.getDataInizio())
-                        .dataFine(prenotazionePostDTO.getDataFine())
-                        .utente(sp.utenteService.cercaPerId(prenotazionePostDTO.getUtenteId()))
-                        .postazione(sp.postazioneService.cercaPerId(prenotazionePostDTO.getPostazioneId()))
-                        .costoTotale(prenotazionePostDTO.getCostoTotale())
-                        .stato(StatoPrenotazione.CONFERMATA)
-                        .build()
-        );
     }
 }

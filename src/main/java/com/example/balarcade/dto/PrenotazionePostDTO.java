@@ -16,6 +16,7 @@ public class PrenotazionePostDTO {
     private LocalDateTime dataFine;
     private Long utenteId;
     private Long postazioneId;
+    private Long prenotazioneId;
     private Integer costoTotale;
 
 }

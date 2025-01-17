@@ -36,4 +36,10 @@ public class PrenotazioneController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping
+    public ResponseEntity<Void> modificaPrenotazione(@Valid @RequestBody PrenotazionePostDTO prenotazionePostDTO) {
+        sp.prenotazioneService.modificaPrenotazione(prenotazionePostDTO);
+        return ResponseEntity.ok().build();
+    }
+
 }
