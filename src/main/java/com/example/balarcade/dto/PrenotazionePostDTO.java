@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class PrenotazioneDTO {
+public class PrenotazionePostDTO {
 
     private LocalDateTime dataInizio;
     private LocalDateTime dataFine;
