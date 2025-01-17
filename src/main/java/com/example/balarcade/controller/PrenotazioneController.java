@@ -30,4 +30,10 @@ public class PrenotazioneController {
         return ResponseEntity.ok(PrenotazioneGetDTO.fromEntity(prenotazioni));
     }
 
+    @DeleteMapping
+    public ResponseEntity<Void> eliminaPrenotazione(@RequestParam("idPrenotazione") Long idPrenotazione) {
+        sp.prenotazioneService.eliminaPrenotazione(idPrenotazione);
+        return ResponseEntity.ok().build();
+    }
+
 }

@@ -29,6 +29,14 @@ public class PrenotazioneService {
     }
 
     @Transactional
+    public void eliminaPrenotazione(Long idPrenotazione) {
+        Prenotazione prenotazione = repository.findById(idPrenotazione)
+                .orElseThrow(() -> new BalarcadeException("Prenotazione non trovata", HttpStatus.NOT_FOUND));
+
+        repository.delete(prenotazione);
+    }
+
+    @Transactional
     public void prenota(PrenotazionePostDTO prenotazionePostDTO) {
         LocalDateTime oggi = LocalDateTime.now();
 
