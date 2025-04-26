@@ -63,7 +63,7 @@ public class SecurityConfig {
 				.csrf(AbstractHttpConfigurer::disable) // Disabilita CSRF per le API stateless
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless
 				.authorizeHttpRequests(requests -> requests
-						.requestMatchers("/api/auth/login", "/api/utente/registrazione").permitAll() // Permetti l'accesso pubblico al login e registrazione
+						.requestMatchers("/api/auth/login", "/api/utente/registrazione", "/api/postazione").permitAll() // Permetti l'accesso pubblico al login e registrazione
 						.requestMatchers("/admin").hasRole("ADMIN") // Accesso riservato agli amministratori
 						.anyRequest().authenticated() // Tutte le altre richieste richiedono autenticazione
 				)
