@@ -38,4 +38,8 @@ public class UtenteService {
         return repository.findById(id).get();
     }
 
+    public Utente cercaPerEmail(String email) {
+        return repository.findByEmail(email).get();
+    }
+
 }
