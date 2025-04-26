@@ -17,6 +17,7 @@ public class PostazioneController {
 
     @GetMapping
     public ResponseEntity<List<PostazioneDTO>> prendiPostazioni() {
+        System.out.println("prendiPostazioni");
         List<Postazione> postazioni = sp.postazioneService.prendiPostazioni();
         return ResponseEntity.ok(PostazioneDTO.fromEntity(postazioni));
     }

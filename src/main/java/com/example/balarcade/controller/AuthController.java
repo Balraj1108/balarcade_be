@@ -26,6 +26,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public Map<String, Object> loginHandler(@RequestBody UtenteAuthDTO body) {
+        System.out.println("loginHandler");
         try {
             // Login e generazione token
             UsernamePasswordAuthenticationToken authInputToken = new UsernamePasswordAuthenticationToken(
