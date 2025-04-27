@@ -1,5 +1,6 @@
 package com.example.balarcade.controller;
 
+import com.example.balarcade.dto.PrenotazioneGetAdminDTO;
 import com.example.balarcade.dto.PrenotazioneGetDTO;
 import com.example.balarcade.dto.PrenotazionePostDTO;
 import com.example.balarcade.model.Prenotazione;
@@ -45,7 +46,7 @@ public class PrenotazioneController {
     }
 
     @GetMapping("/tutte")
-    public ResponseEntity<List<PrenotazioneGetDTO>> prendiTuttePrenotazioni(Authentication authentication) {
+    public ResponseEntity<List<PrenotazioneGetAdminDTO>> prendiTuttePrenotazioni(Authentication authentication) {
         boolean isAdmin = authentication.getAuthorities().stream()
                 .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
 
@@ -53,7 +54,7 @@ public class PrenotazioneController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
         List<Prenotazione> prenotazioni = sp.prenotazioneService.prendiTuttePrenotazioni();
-        return ResponseEntity.ok(PrenotazioneGetDTO.fromEntity(prenotazioni));
+        return ResponseEntity.ok(PrenotazioneGetAdminDTO.fromEntity(prenotazioni));
     }
 
 }
