@@ -28,6 +28,10 @@ public class PrenotazioneService {
         return repository.findAllByUtenteId(utenteId);
     }
 
+    public List<Prenotazione> prendiTuttePrenotazioni() {
+        return repository.findAll();
+    }
+
     @Transactional
     public void eliminaPrenotazione(Long idPrenotazione) {
         Prenotazione prenotazione = repository.findById(idPrenotazione)
