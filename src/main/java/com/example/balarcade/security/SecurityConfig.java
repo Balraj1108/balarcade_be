@@ -49,7 +49,9 @@ public class SecurityConfig {
 				"http://localhost:80",
 				"http://localhost",
 				"http://localhost:4200",
-				"http://localhost:5200"
+				"http://localhost:5200",
+				"http://35.152.218.201:80",
+				"http://35.152.218.201"
 		));
 		corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		corsConfig.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Requested-With"));
